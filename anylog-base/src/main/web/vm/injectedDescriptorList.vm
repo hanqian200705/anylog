@@ -1,0 +1,27 @@
+<html>
+<head>
+   #include("header.vm")
+   <title>已经注入列表：</title>
+</head>
+	<body>
+	#include("bigtitle.vm")
+	#foreach ($emp in $!{cws})
+		<div class="panel panel-primary">
+		   <div class="panel-heading">
+		      <h3 class="panel-title">$!{emp.className}</h3>
+		   </div>
+		   <div class="panel-body">
+					#foreach($femp in $!{emp.fieldWrappers})
+					<div class="form-group">
+				      <label for="$!{femp.fieldName}" class="col-sm-2 control-label">$!{femp.fieldName}</label>
+				      <div class="col-sm-10">
+				         <input type="text" class="form-control" id="$!{femp.fieldName}" name="$!{femp.fieldName}"
+				            placeholder="$!esc.html($!{femp.value})"  disabled="disabled" />
+				      </div>
+				   </div>
+					#end  
+		   </div>
+		</div>
+	#end		
+	</body>
+</html>

@@ -1,7 +1,45 @@
-本机所有java虚拟机列表如下:<br/><br/><br/><br/><br/>
-#foreach($emp in $!{wrappers})
-
-		<a href="/vm.html?pid=$!{emp.id}"> PID：$!{emp.id} 执行路径：$!{emp.displayName}</a>                  #if($!{emp.connected})<a href="/close.html?pid=$!{emp.id}"><font color=red>restore the vm</font></a>   #end
-       
-         <br/><br/><br/>
-#end
+<html>
+<head>
+   #include("header.vm")
+   <title>本机所有java虚拟机列表</title>
+</head>
+<body>
+#include("bigtitle.vm")
+	<div class="panel panel-primary">
+	   <div class="panel-heading">
+	      <h3 class="panel-title">本机所有java虚拟机列表</h3>
+	   </div>
+	   <div class="panel-body">	
+	<table class="table">
+	   <thead>
+	      <tr>
+	         <th>java进程id</th>
+	         <th>执行路径</th>
+	         <th>操作</th>
+	      </tr>
+	   </thead>
+		<tbody>
+			#foreach($emp in $!{wrappers})
+			<tr  #if($!{emp.connected})  class="active" #end>
+					<td>$!{emp.id}</td> 
+					<td>
+					#if($!{emp.displayName.length()}>90)  
+						$!{emp.displayName.substring(0,90)}
+					  #else  
+					     $!{emp.displayName} 
+					  #end 
+					</td>
+					<td>
+					<a href="/vm.html?pid=$!{emp.id}">添加注入</a> 
+						#if($!{emp.connected})
+							|<a href="/injectedDescriptorList.html?pid=$!{emp.id}">查看注入</a>
+							|<a href="/close.html?pid=$!{emp.id}"><font color=green>清除修改</font></a>   
+						#end
+					</td>
+			</tr>			         
+			#end
+		</tbody>
+	</table>
+	</div></div>
+</body>
+</html>

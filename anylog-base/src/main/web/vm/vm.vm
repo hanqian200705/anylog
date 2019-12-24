@@ -1,9 +1,26 @@
-<a href="/menu.html">go to menu</a>     
-<br/>
-可操作列表如下(如果功能没有描述的，请大家自己根据类名理解操作的含义哈):<br/><br/><br/><br/><br/>
-#foreach($emp in $!{descriptors})
-
-		<a href="/operate.html?pid=$!{pid}&operate=$!{emp.className}">$!{emp.className}:$!{emp.classDesc}</a>
-       
-         <br/><br/><br/>
-#end
+<html>
+<head>
+   #include("header.vm")
+   <title>请对java进程选择操作</title>
+</head>
+	<body>
+	#include("bigtitle.vm")
+	<div class="panel panel-primary">
+	   <div class="panel-heading">
+	      <h3 class="panel-title">请对java进程选择操作</h3>
+	   </div>
+	   <div class="panel-body">	
+		<table class="table">
+			 <tbody>  
+				#foreach($emp in $!{descriptors})
+					<tr>
+						<td><a href="/operate.html?pid=$!{pid}&operate=$!{emp.className}">$!{emp.className}</a></td>
+						<td>$!{emp.classDesc}</td>
+					</tr>
+				#end
+			</tbody>
+		</table>
+		</div>
+		</div>
+	</body>
+</html>
